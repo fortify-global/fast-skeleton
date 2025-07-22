@@ -1,0 +1,76 @@
+# .gitignore
+# This file specifies intentionally untracked files to ignore when using Git.
+# It's configured for a Python project with virtual environments,
+# and common IDEs like VS Code and IntelliJ/PyCharm.
+
+# Python specific ignores
+##########################
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+.tox/
+.pytest_cache/
+.coverage
+.mypy_cache/
+.ipynb_checkpoints/
+*.bak
+*.swp
+*.swo
+*.tmp
+*.log
+*.sqlite3
+*.db
+!*.sqlite3-journal # Allow journal files if needed for specific DB setups
+
+# Byte-code files
+*.py[co]
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+dist/
+*.egg-info/
+.cache/
+
+# Environment variables
+.env
+.flaskenv
+.venv_data/ # If you have a specific folder for venv data
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.nox/
+
+# IDE specific ignores
+######################
+
+# VS Code specific files
+.vscode/
+# Only ignore settings and launch configurations if you don't want to share them.
+# Otherwise, you might want to keep .vscode/settings.json and .vscode/launch.json
+# .vscode/settings.json
+# .vscode/launch.json
+.vscode/*.log
+.vscode/.ropeproject/
+
+# IntelliJ / PyCharm specific files
+.idea/
+*.pyc
+*.pyo
+
+# Operating System specific ignores
+###################################
+.DS_Store
+Thumbs.db
+
