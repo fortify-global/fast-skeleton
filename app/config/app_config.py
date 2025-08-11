@@ -1,6 +1,4 @@
 """
-This module is used to load the configuration for the application.
-It uses the dotenv module to load the configuration from the .env file.
 It will either set the configuration from the .env file or from the environment variables or 
 default values if not found.
 
@@ -9,14 +7,16 @@ default values if not found.
 import os
 from dotenv import load_dotenv
 
-load_dotenv(override=False)
-
+if not load_dotenv(override=True):
+    print('Could not find any .env file. The module will depend on system env only')
+else:
+    print('.env file loaded successfully')
 
 class Config:
-    APP_NAME = os.getenv('APP_NAME', 'SKELETON')
+    APP_NAME = os.getenv('APP_NAME','')
 
     # Environment
-    ENVIRONMENT = os.getenv('ENVIRONMENT', 'DEVELOPMENT')
+    ENVIRONMENT = os.getenv('ENVIRONMENT', '')
     REGION = os.getenv('REGION', 'LOC')
     LANGUAGE = os.getenv('APP_LANGUAGE', 'EN')
 

@@ -6,7 +6,7 @@ from fastapi.responses import JSONResponse
 from app import logger
 from app.error.exception import AppException
 from app.error.model import AppExceptionModel
-from app.error.error_message import em
+from app.error.message import em
 
 
 def _traceback_details() -> str:

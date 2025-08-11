@@ -4,6 +4,7 @@
 - Log with `from app import logger`. 
 - This is a medium size application
 - Do not over optimize.
+- We do not use plural names. 
 
 # Error handling
 - Prefer raising AppException and other exception which extend or inherit AppException.

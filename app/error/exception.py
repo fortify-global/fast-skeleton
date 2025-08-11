@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any, Optional
 
 from fastapi import HTTPException
-from app.error.error_message import em
+from app.error.message import em
 
 
 class AppException(HTTPException):
