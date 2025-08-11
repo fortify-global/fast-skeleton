@@ -1,0 +1,22 @@
+# Architecture
+- Use FastAPI with 12-factor and SOLID.
+- Centralized error model: {code, key, message, detail}. Always return JSON via handlers.
+- Log with `from app import logger`. 
+- This is a medium size application
+- Do not over optimize.
+
+# Error handling
+- Prefer raising AppException and other exception which extend or inherit AppException.
+- Database/ThirdParty/Unexpected → include traceback in details; return proper HTTP.
+
+# API
+- Versioned routes under /api/v1, /api/v2.
+- Use Pydantic models for I/O.
+
+# Code style
+- Python 3.12, type hints, black/ruff compatible.
+- F-strings for formatting in logging also 
+
+# DB
+
+# Tests
