@@ -3,26 +3,36 @@ from __future__ import annotations
 from typing import Any, Optional
 
 from fastapi import HTTPException
-from app.error.message import em
+from app.error.message import am, dm
 
+"""
+Please provide 
+code - generally http code
+key - error key - associated message will be fetched from message.py, default key is defualt, avoid defualt
+message - 
+reson - error exact field,more ecplation about error if can be passed
+detail - kind of stack trace , dynamic errors
 
+"""
 class AppException(HTTPException):
-    def __init__(self, code: int, key: str, reason: Optional[str] = '', detail: Optional[Any] = None) -> None:
+    def __init__(self, code: int, key:str= 'default', reason: Optional[str] = '', detail: Optional[Any] = None) -> None:
         super().__init__(reason)
         self.code = code
         self.key = key
-        self.message = em.get[key]
+        self.message = am.get[key]
         self.reason = reason
         self.detail = detail
-        
-"""
+
 class DatabaseException(AppException):
-    def __init__(self, message: str, *, code: str = "DATABASE_ERROR", key: str = "database_error", details: Optional[Any] = None) -> None:
-        super().__init__(message)
+    def __init__(self, code: int, key:str= 'default', reason: Optional[str] = '', detail: Optional[Any] = None) -> None:
         self.code = code
         self.key = key
-        self.message = message
-        self.details = details
+        self.message = dm.get[key]
+        self.reason = reason
+        self.details = detail
+        
+"""
+
 
 
 class ThirdPartyError(AppException):
