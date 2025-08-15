@@ -65,11 +65,12 @@ class PGSinglePool:
                     timeout=timeout,
                     **connect_kwargs,
                 )
+                logger.info(f"Successful PostgreSQL pool postgresql://{cls.USER}:******@{cls.HOST}:{cls.PORT}/{cls.DATABASE}")
             except Exception as exc:
                 logger.exception(f"Failed to initialize PostgreSQL pool postgresql://{cls.USER}:******@{cls.HOST}:{cls.PORT}/{cls.DATABASE}")
                 raise DatabaseException(
                     code=500,
-                    key='database_connection_error',
+                    key='connection_error',
                     reason="Failed to initialize PostgreSQL pool",
                     detail={"trace": "".join(traceback.format_exc())},
                 ) from exc
@@ -182,7 +183,7 @@ class PGMultiPool:
                 logger.exception("Failed to initialize PostgreSQL pool for tenant %s", client_key)
                 raise DatabaseException(
                     code=500,
-                    key='database_connection_error',
+                    key='connection_error',
                     reason=f"Failed to initialize pool for tenant {client_key}",
                     detail={"dsn": masked, "trace": "".join(traceback.format_exc())},
                 ) from exc
@@ -195,7 +196,7 @@ class PGMultiPool:
         if pool is None:
             raise DatabaseException(
                 code=500,
-                key='database_connection_error',
+                key='connection_error',
                 reason=f"Pool for tenant {client_key} is not initialized",
                 detail=None,
             )

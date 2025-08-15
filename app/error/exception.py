@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from app.util.global_values import get_main_error
 from typing import Any, Optional
 
 from fastapi import HTTPException
@@ -15,21 +16,22 @@ detail - kind of stack trace , dynamic errors
 
 """
 class AppException(HTTPException):
-    def __init__(self, code: int, key:str= 'default', reason: Optional[str] = '', detail: Optional[Any] = None) -> None:
-        super().__init__(reason)
+    def __init__(self, code: int, key: str = 'default', reason: Optional[str] = '', detail: Optional[Any] = None) -> None:
+        super().__init__(status_code=code, detail=reason)
         self.code = code
         self.key = key
-        self.message = am.get[key]
+        self.message = am[key]
         self.reason = reason
-        self.detail = detail
+        self.detail = get_main_error()
 
 class DatabaseException(AppException):
     def __init__(self, code: int, key:str= 'default', reason: Optional[str] = '', detail: Optional[Any] = None) -> None:
+        super().__init__(code=code, reason=reason)
         self.code = code
         self.key = key
-        self.message = dm.get[key]
+        self.message = dm[key]
         self.reason = reason
-        self.details = detail
+        self.detail = get_main_error()
         
 """
 

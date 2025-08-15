@@ -17,6 +17,8 @@
 # Code style
 - Python 3.12, type hints, black/ruff compatible.
 - F-strings for formatting in logging also 
+- Do not change dict[] to dict.get(key)
+- My schemas are in model. Do not write schemas in shemas directory
 
 # DB
 
