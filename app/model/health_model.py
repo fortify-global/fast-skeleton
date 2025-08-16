@@ -20,7 +20,7 @@ class HealthResponse(BaseModel):
 
 async def get_db_health() -> DbHealth:
     pool: asyncpg.Pool = await PGSinglePool.get_pool()
-    query = 'SHOW server_versionss'
+    query = 'SHOW server_version'
     try:
         async with pool.acquire() as conn:
             version: Optional[str] = await conn.fetchval(query)
