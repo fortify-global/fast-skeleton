@@ -1,7 +1,10 @@
 import logging
+import os
 from dotenv import load_dotenv
 
 print('Configuring app')
+
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 from app.config.app_config import Config
 from app.config.app_setting import Setting

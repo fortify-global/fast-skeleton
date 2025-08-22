@@ -22,3 +22,4 @@ class Config:
 
     # Log
     LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
+    LOG_DIR = os.getenv('LOG_DIR', '..')

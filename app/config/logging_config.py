@@ -1,5 +1,8 @@
 import os
 import logging.config
+from app.config.app_setting import Setting
+from app.config.app_config import Config
+from pathlib import Path
 
 
 app_logging_config = {
@@ -20,16 +23,16 @@ app_logging_config = {
     },
     'handlers': {
         'console': {
-            'level': os.getenv('LOG_LEVEL'),
+            'level': Config.LOG_LEVEL,
             'formatter': 'info',
             'class': 'logging.StreamHandler',
             'stream': 'ext://sys.stdout',
         },
         'info_file_handler': {
-            'level': os.getenv('LOG_LEVEL'),
+            'level': Config.LOG_LEVEL,
             'formatter': 'info',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.getenv('LOG_FILE_INFO'),
+            'filename': f'{Config.LOG_DIR}/info.log',
             'mode': 'a',
             'maxBytes': 1048576,
             'backupCount': 10
@@ -38,7 +41,7 @@ app_logging_config = {
             'level': 'WARNING',
             'formatter': 'error',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.getenv('LOG_FILE_ERROR'),
+            'filename': f'{Config.LOG_DIR}/error.log',
             'mode': 'a',
             'maxBytes': 1048576,
             'backupCount': 10
@@ -55,4 +58,6 @@ app_logging_config = {
 }
 
 def configure_logging():
+    log_dir = Path(f'{Setting.PROJECT_ROOT}/{Config.LOG_DIR}')
+    log_dir.mkdir(exist_ok=True)
     logging.config.dictConfig(app_logging_config)
